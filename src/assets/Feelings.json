@@ -44,7 +44,7 @@
                     ]
                 },
                 {
-                    "name": "proud",
+                    "name": "Proud",
                     "children": [
                         {
                             "name": "Successful",
@@ -57,7 +57,7 @@
                     ]
                 },
                 {
-                    "name": "accepted",
+                    "name": "Accepted",
                     "children": [
                         {
                             "name": "Respected",
@@ -70,7 +70,7 @@
                     ]
                 },
                 {
-                    "name": "powerful",
+                    "name": "Powerful",
                     "children": [
                         {
                             "name": "Courageous",
@@ -83,7 +83,7 @@
                     ]
                 },
                 {
-                    "name": "peaceful",
+                    "name": "Peaceful",
                     "children": [
                         {
                             "name": "Loving",
@@ -96,7 +96,7 @@
                     ]
                 },
                 {
-                    "name": "trusting",
+                    "name": "Trusting",
                     "children": [
                         {
                             "name": "Sensitive",
@@ -109,7 +109,7 @@
                     ]
                 },
                 {
-                    "name": "optimistic",
+                    "name": "Optimistic",
                     "children": [
                         {
                             "name": "Hopeful",
@@ -236,7 +236,7 @@
                     ]
                 },
                 {
-                    "name": "Aweful",
+                    "name": "Awful",
                     "children": [
                         {
                             "name": "Nauseated",
@@ -280,7 +280,7 @@
                     ]
                 },
                 {
-                    "name": "humiliated",
+                    "name": "Humiliated",
                     "children": [
                         {
                             "name": "Disrespected",
@@ -296,7 +296,7 @@
                     "name": "Bitter",
                     "children": [
                         {
-                            "name": "Iindignant",
+                            "name": "Indignant",
                             "value": 1
                         },
                         {
@@ -319,7 +319,7 @@
                     ]
                 },
                 {
-                    "name": "Agressive",
+                    "name": "Aggressive",
                     "children": [
                         {
                             "name": "Provoked",
@@ -383,7 +383,7 @@
                             "value": 1
                         },
                         {
-                            "name": "Firghtened",
+                            "name": "Frightened",
                             "value": 1
                         }
                     ]
