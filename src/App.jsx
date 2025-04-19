@@ -83,6 +83,8 @@ const findPathParts = (emotionName, data, path = []) => {
 function App() {
     const [emotions, setEmotions] = useState([]);
     const [emotion, setEmotion] = useState("");
+    const [parentEmotion, setParentEmotion] = useState("");
+    const [grandparentEmotion, setGrandparentEmotion] = useState("");
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
     const [imagePath, setImagePath] = useState(null);
@@ -135,14 +137,39 @@ function App() {
         }
     }, [emotions, emotion, pickEmotion]);
 
-    // Update image path when emotion changes
+    // Update image path, parent emotion, and grandparent emotion when emotion changes
     useEffect(() => {
         if (emotion) {
             const path = findImagePath(emotion, feelingsData);
             console.log("Updated emotion:", emotion, "Image path:", path);
             setImagePath(path);
+
+            // Find parent and grandparent emotions
+            const pathParts = findPathParts(emotion, feelingsData);
+            if (pathParts && pathParts.length >= 2) {
+                // pathParts contains [root, grandparent, parent, ..., emotion]
+                // Get the second-to-last element (parent)
+                const parent = pathParts[pathParts.length - 2];
+                setParentEmotion(parent);
+                console.log("Parent emotion:", parent);
+
+                // Check if there's a grandparent (if path has at least 3 elements)
+                if (pathParts.length >= 3) {
+                    // Get the third-to-last element (grandparent)
+                    const grandparent = pathParts[pathParts.length - 3];
+                    setGrandparentEmotion(grandparent);
+                    console.log("Grandparent emotion:", grandparent);
+                } else {
+                    setGrandparentEmotion("");
+                }
+            } else {
+                setParentEmotion("");
+                setGrandparentEmotion("");
+            }
         } else {
             setImagePath(null);
+            setParentEmotion("");
+            setGrandparentEmotion("");
         }
     }, [emotion]);
 
@@ -151,7 +178,7 @@ function App() {
     return (
         <main className="app-container">
             <h1 className="app-title">Emotion Dice</h1>
-            <p className="app-subtitle">Explore and discover different emotions</p>
+            <p className="app-subtitle">A tool for improv actors to explore emotional range and expression</p>
 
             {isLoading ? (
                 <>
@@ -186,12 +213,33 @@ function App() {
                             </div>
                         )}
                         <div className="emotion-display">
-                            {emotion || "Ready to explore emotions"}
+                            {emotion ? (
+                                <>
+                                    {grandparentEmotion && (
+                                        <div className="grandparent-emotion">
+                                            {grandparentEmotion}
+                                        </div>
+                                    )}
+                                    {parentEmotion && (
+                                        <div className="parent-emotion">
+                                            {parentEmotion}
+                                        </div>
+                                    )}
+                                    {emotion}
+                                </>
+                            ) : (
+                                "Ready to explore emotions"
+                            )}
                         </div>
                         <p className="emotion-context">
                             {emotion ? 
-                                `How does "${emotion}" feel to you? Take a moment to reflect on this emotion.` : 
-                                "Click the button below to discover an emotion to explore."
+                                parentEmotion && grandparentEmotion ? 
+                                    `How would you express "${emotion}" (a type of ${parentEmotion}, which is a type of ${grandparentEmotion}) in a scene? Consider body language, tone, and facial expressions.` : 
+                                    parentEmotion ? 
+                                        `How would you express "${emotion}" (a type of ${parentEmotion}) in a scene? Consider body language, tone, and facial expressions.` : 
+                                        `How would you express "${emotion}" in a scene? Consider body language, tone, and facial expressions.`
+                                : 
+                                "Click the button below to discover an emotion to portray in your improv exercise."
                             }
                         </p>
                     </div>
@@ -209,7 +257,7 @@ function App() {
                     </button>
 
                     <div className="emotion-info">
-                        <p>This tool randomly selects from {emotions.length} different emotions to help you explore and understand your feelings.</p>
+                        <p>This tool randomly selects from {emotions.length} different emotions to help improv performers practice emotional range and add spontaneity to exercises.</p>
                     </div>
                 </>
             )}

@@ -1,17 +1,22 @@
 /* Global styles and variables */
 :root {
-  --primary-color: #4361ee; /* Modern blue - calming and friendly */
-  --secondary-color: #4cc9f0; /* Light blue - fresh and inviting */
-  --accent-color: #f72585; /* Vibrant pink for highlights */
-  --background-color: #f8f9fa;
-  --text-color: #2b2d42;
-  --light-accent: #edf2f4;
-  --dark-accent: #8d99ae;
-  --success-color: #2ec4b6;
-  --border-radius: 8px; /* Reduced for more minimalist look */
-  --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Lighter shadow */
-  --transition-speed: 0.25s;
+  --primary-color: #64748b; /* Updated to slate - more neutral and sophisticated */
+  --secondary-color: #7f8ea3; /* Updated to lighter slate - neutral but distinct */
+  --accent-color: #94a3b8; /* Updated to slate - subtle and neutral */
+  --background-color: #f9fafb;
+  --text-color: #1e293b;
+  --light-accent: #f1f5f9;
+  --dark-accent: #94a3b8;
+  --success-color: #10b981;
+  --border-radius: 12px; /* Increased for more modern look */
+  --border-radius-lg: 20px; /* Larger radius for containers */
+  --border-radius-xl: 28px; /* Extra large radius for buttons */
+  --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03); /* Lighter shadow */
+  --box-shadow-hover: 0 10px 25px rgba(100, 116, 139, 0.15); /* Enhanced shadow for hover states with new color */
+  --transition-speed: 0.3s;
   --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  --gradient-primary: linear-gradient(135deg, var(--primary-color), #94a3b8); /* Subtle gradient with neutral colors */
+  --gradient-accent: linear-gradient(135deg, var(--accent-color), #cbd5e1); /* Accent gradient with neutral colors */
 }
 
 /* Base styles */
@@ -26,27 +31,64 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Accessibility enhancements */
+:focus {
+  outline: 3px solid rgba(100, 116, 139, 0.5);
+  outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 3px solid rgba(100, 116, 139, 0.5);
+  outline-offset: 2px;
+}
+
 /* App container */
 .app-container {
-  max-width: 600px; /* Reduced for more minimalist look */
+  max-width: 600px;
   margin: 0 auto;
   padding: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
-  background-color: white; /* Simplified background for minimalist design */
+  background-color: white;
   box-shadow: var(--box-shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Add subtle background pattern */
+.app-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background-image: radial-gradient(circle at 25% 25%, rgba(100, 116, 139, 0.05) 1%, transparent 8%), 
+                    radial-gradient(circle at 75% 75%, rgba(148, 163, 184, 0.05) 1%, transparent 8%);
+  background-size: 60px 60px;
+  opacity: 0.6;
+  z-index: 0;
 }
 
 /* App title and subtitle */
 .app-title {
-  color: var(--primary-color);
-  font-size: clamp(1.8rem, 5vw, 2.2rem);
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: clamp(2rem, 5vw, 2.5rem);
   margin-bottom: 0.5rem;
   text-align: center;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: -0.5px; /* Negative tracking for modern look */
+  position: relative;
+  z-index: 1;
 }
 
 .app-subtitle {
@@ -56,6 +98,9 @@ body {
   text-align: center;
   font-weight: 400;
   max-width: 500px;
+  position: relative;
+  z-index: 1;
+  line-height: 1.7;
 }
 
 /* Emotion container */
@@ -65,15 +110,20 @@ body {
   flex-direction: column;
   align-items: center;
   margin-bottom: 2rem;
-  padding: 1.5rem 1rem;
+  padding: 2rem 1.5rem;
   background-color: var(--light-accent);
-  border-radius: var(--border-radius);
+  border-radius: var(--border-radius-lg);
   transition: all var(--transition-speed) ease;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(5px);
 }
 
 .emotion-container:hover {
   transform: translateY(-3px);
-  box-shadow: var(--box-shadow);
+  box-shadow: var(--box-shadow-hover);
 }
 
 /* Emotion display */
@@ -82,11 +132,57 @@ body {
   font-weight: 700;
   color: var(--primary-color);
   text-align: center;
-  margin: 1rem 0;
-  padding: 0.75rem;
+  margin: 1.25rem 0;
+  padding: 1.25rem;
   width: 100%;
-  border-radius: var(--border-radius);
+  border-radius: var(--border-radius-lg);
   background-color: white;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.08);
+  position: relative;
+  transition: all var(--transition-speed) ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.emotion-display:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(100, 116, 139, 0.12);
+}
+
+/* Grandparent emotion display */
+.grandparent-emotion {
+  font-size: clamp(0.85rem, 2vw, 1rem);
+  font-weight: 600;
+  color: var(--accent-color);
+  text-align: center;
+  margin-bottom: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--border-radius);
+  background-color: rgba(148, 163, 184, 0.1); /* Light background based on new accent color */
+  display: block;
+  width: 100%;
+  letter-spacing: 0.3px;
+  box-shadow: 0 2px 5px rgba(148, 163, 184, 0.08);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+}
+
+/* Parent emotion display */
+.parent-emotion {
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  font-weight: 600;
+  color: var(--secondary-color);
+  text-align: center;
+  margin-bottom: 1rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--border-radius);
+  background-color: rgba(127, 142, 163, 0.1); /* Light background based on new secondary color */
+  display: block;
+  width: 100%;
+  letter-spacing: 0.3px;
+  box-shadow: 0 2px 5px rgba(127, 142, 163, 0.08);
+  border: 1px solid rgba(127, 142, 163, 0.15);
 }
 
 /* Refined emotion image container */
@@ -97,69 +193,112 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   background-color: transparent;
   transition: all var(--transition-speed) ease;
+  position: relative;
 }
 
 /* Enhanced emotion image styling */
 .emotion-image {
   width: 100%;
   height: auto;
-  border-radius: var(--border-radius);
-  transition: transform var(--transition-speed) ease;
-  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+  border-radius: var(--border-radius-lg);
+  transition: all var(--transition-speed) ease;
+  filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.1));
+  border: 3px solid white;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
 .emotion-image:hover {
-  transform: scale(1.02);
+  transform: scale(1.03) rotate(1deg);
+  filter: drop-shadow(0 12px 20px rgba(0, 0, 0, 0.15));
 }
 
 /* Button styling */
 .emotion-button {
-  padding: 0.75rem 2rem;
+  padding: 0.85rem 2.25rem;
   font-weight: 600;
   font-size: 1rem;
-  background-color: var(--primary-color);
+  background: var(--gradient-primary);
   color: white;
   border: none;
-  border-radius: 25px; /* Rounded button for friendly appearance */
+  border-radius: var(--border-radius-xl);
   cursor: pointer;
-  transition: all var(--transition-speed) ease;
+  transition: all var(--transition-speed) cubic-bezier(0.34, 1.56, 0.64, 1);
   letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(100, 116, 139, 0.2);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.emotion-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--gradient-primary);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity var(--transition-speed) ease;
+  transform: scale(1.1) translateY(-10px);
 }
 
 .emotion-button:hover {
-  transform: translateY(-2px);
-  background-color: #3b56d4; /* Slightly darker shade of primary color */
-  box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3); /* Colored shadow for depth */
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(100, 116, 139, 0.3);
+}
+
+.emotion-button:hover::before {
+  opacity: 1;
+  transform: scale(1) translateY(0);
 }
 
 .emotion-button:active {
   transform: translateY(0);
+  box-shadow: 0 4px 8px rgba(100, 116, 139, 0.2);
 }
 
 .emotion-button.picked {
-  background-color: var(--accent-color);
+  background: var(--gradient-accent);
+  box-shadow: 0 4px 12px rgba(148, 163, 184, 0.2);
+}
+
+.emotion-button.picked::before {
+  background: var(--gradient-accent);
+}
+
+.emotion-button.picked:hover {
+  box-shadow: 0 8px 20px rgba(148, 163, 184, 0.3);
 }
 
 .emotion-button:disabled {
-  background-color: var(--light-accent);
+  background: var(--light-accent);
   color: var(--dark-accent);
   cursor: not-allowed;
   transform: none;
   box-shadow: none;
 }
 
+.emotion-button:disabled::before {
+  display: none;
+}
+
 /* Loading spinner */
 .loading-spinner {
-  width: 40px;
-  height: 40px;
-  border: 3px solid rgba(67, 97, 238, 0.1);
+  width: 48px;
+  height: 48px;
+  border: 3px solid rgba(100, 116, 139, 0.1);
   border-top: 3px solid var(--primary-color);
+  border-right: 3px solid var(--secondary-color);
+  border-bottom: 3px solid var(--accent-color);
   border-radius: 50%;
-  animation: spin 0.8s ease-in-out infinite;
+  animation: spin 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
   margin: 2rem auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
 @keyframes spin {
@@ -169,54 +308,99 @@ body {
 
 /* Error message */
 .error-message {
-  padding: 1.25rem;
-  background-color: #fff0f3;
+  padding: 1.5rem;
+  background-color: rgba(148, 163, 184, 0.05);
   color: var(--accent-color);
-  border-radius: var(--border-radius);
-  margin: 1.5rem 0;
+  border-radius: var(--border-radius-lg);
+  margin: 1.75rem 0;
   text-align: center;
   width: 100%;
   max-width: 450px;
-  border-left: 3px solid var(--accent-color);
+  box-shadow: 0 5px 15px rgba(148, 163, 184, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.error-message::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--gradient-accent);
+  border-radius: 2px;
+}
+
+.error-message p {
+  font-weight: 500;
+  margin-bottom: 1.25rem;
+  letter-spacing: 0.2px;
 }
 
 .error-message button {
-  margin-top: 1rem;
-  padding: 0.5rem 1.5rem;
-  background-color: var(--accent-color);
+  margin-top: 0.5rem;
+  padding: 0.6rem 1.75rem;
+  background: var(--gradient-accent);
   color: white;
   border: none;
-  border-radius: 20px;
+  border-radius: var(--border-radius-xl);
   cursor: pointer;
-  transition: all var(--transition-speed) ease;
-  font-weight: 500;
+  transition: all var(--transition-speed) cubic-bezier(0.34, 1.56, 0.64, 1);
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(148, 163, 184, 0.2);
+  letter-spacing: 0.3px;
 }
 
 .error-message button:hover {
-  background-color: #e01e79;
-  transform: translateY(-2px);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 6px 15px rgba(148, 163, 184, 0.25);
 }
 
 /* Emotion context and info */
 .emotion-context {
-  font-size: 1rem;
-  color: var(--dark-accent);
+  font-size: 1.05rem;
+  color: var(--text-color);
   text-align: center;
-  margin: 1.25rem 0;
-  line-height: 1.6;
+  margin: 1.5rem 0;
+  line-height: 1.7;
   max-width: 450px;
+  padding: 0.75rem;
+  position: relative;
+  z-index: 1;
+  font-weight: 450;
+  letter-spacing: 0.2px;
+}
+
+.emotion-context strong {
+  color: var(--primary-color);
+  font-weight: 600;
 }
 
 .emotion-info {
-  margin-top: 2.5rem;
-  padding: 0.75rem 1rem;
-  border-radius: var(--border-radius);
+  margin-top: 3rem;
+  padding: 1rem 1.25rem;
+  border-radius: var(--border-radius-lg);
   text-align: center;
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   color: var(--dark-accent);
   max-width: 500px;
-  border-top: 2px solid var(--secondary-color);
-  opacity: 0.9;
+  background-color: var(--light-accent);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
+  position: relative;
+  line-height: 1.6;
+  letter-spacing: 0.2px;
+}
+
+.emotion-info::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: var(--gradient-primary);
+  border-radius: 2px;
 }
 
 /* Debug info - hidden by default */
@@ -238,42 +422,73 @@ body {
     box-shadow: none;
   }
 
+  .app-container::before {
+    height: 150px;
+    background-size: 40px 40px;
+  }
+
   .emotion-container {
-    padding: 1.25rem 0.75rem;
+    padding: 1.5rem 1rem;
+    margin-bottom: 1.5rem;
   }
 
   .emotion-display {
-    padding: 0.5rem;
-    margin: 0.75rem 0;
-  }
-
-  .emotion-button {
-    padding: 0.7rem 1.75rem;
-  }
-
-  .emotion-context {
-    font-size: 0.95rem;
+    padding: 1rem;
     margin: 1rem 0;
   }
 
+  .emotion-button {
+    padding: 0.75rem 1.75rem;
+  }
+
+  .emotion-context {
+    font-size: 1rem;
+    margin: 1.25rem 0;
+    line-height: 1.6;
+  }
+
   .emotion-info {
-    margin-top: 2rem;
-    padding: 0.5rem 0.75rem;
+    margin-top: 2.5rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .grandparent-emotion {
+    font-size: 0.85rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  .parent-emotion {
+    font-size: 0.9rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  .error-message {
+    padding: 1.25rem 1rem;
   }
 }
 
 /* Small mobile adjustments */
 @media (max-width: 400px) {
   .app-title {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
   }
 
   .app-subtitle {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     margin-bottom: 2rem;
+    line-height: 1.6;
   }
 
   .emotion-image-container {
     max-width: 200px;
+  }
+
+  .emotion-display {
+    font-size: 1.4rem;
+  }
+
+  .emotion-button {
+    font-size: 0.95rem;
+    padding: 0.7rem 1.6rem;
   }
 }

@@ -1,12 +1,30 @@
-# React + Vite
+# Emotion Dice
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A web application designed to randomly select emotions for improv class exercises and activities. This tool helps actors and improv students explore and express a wide range of emotions during practice and performances.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Randomly selects from a diverse collection of emotions
+- Displays visual representations of emotions when available
+- Simple, intuitive interface with a single "roll" button
+- Provides context and prompts to help users engage with the selected emotion
 
-## Expanding the ESLint configuration
+## Purpose
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Emotion Dice was created specifically for improv classes to:
+- Help actors practice expressing different emotional states
+- Introduce variety and spontaneity into improv exercises
+- Challenge performers to embody emotions they might not typically explore
+- Serve as a teaching tool for emotional range and expression
+
+## Deployment Steps
+
+1. **Build your app**:
+```bash
+   npm run build 
+```
+
+2. **Upload Your Files**:
+```bash
+   aws s3 sync dist/ s3://<bucket-name> --delete
+```
