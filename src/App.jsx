@@ -150,10 +150,14 @@ function App() {
     // 3 – Render the UI
     return (
         <main className="app-container">
-            <h1 className="app-title">Emotion Picker</h1>
+            <h1 className="app-title">Emotion Dice</h1>
+            <p className="app-subtitle">Explore and discover different emotions</p>
 
             {isLoading ? (
-                <div className="loading-spinner" aria-label="Loading emotions data" />
+                <>
+                    <div className="loading-spinner" aria-label="Loading emotions data" />
+                    <p>Loading emotions...</p>
+                </>
             ) : error ? (
                 <div className="error-message" role="alert">
                     <p>{error}</p>
@@ -175,27 +179,38 @@ function App() {
                                         e.target.style.display = 'none';
                                     }}
                                 />
+                                {/* Debug info hidden in production */}
                                 <div className="debug-info">
                                     Image path: {imagePath}
                                 </div>
                             </div>
                         )}
                         <div className="emotion-display">
-                            {emotion || "No emotion picked yet"}
+                            {emotion || "Ready to explore emotions"}
                         </div>
+                        <p className="emotion-context">
+                            {emotion ? 
+                                `How does "${emotion}" feel to you? Take a moment to reflect on this emotion.` : 
+                                "Click the button below to discover an emotion to explore."
+                            }
+                        </p>
                     </div>
                     <button
                         className={`emotion-button ${emotion ? 'picked' : ''}`}
                         onClick={pickEmotion}
                         aria-label={
                             emotion
-                                ? "Pick another emotion from the Feelings Wheel"
-                                : "Pick a random emotion from the Feelings Wheel"
+                                ? "Roll the emotion dice again"
+                                : "Roll the emotion dice"
                         }
                         disabled={emotions.length === 0}
                     >
-                        {emotion ? "Pick Another" : "Pick Emotion"}
+                        {emotion ? "Roll Again" : "Roll the Dice"}
                     </button>
+
+                    <div className="emotion-info">
+                        <p>This tool randomly selects from {emotions.length} different emotions to help you explore and understand your feelings.</p>
+                    </div>
                 </>
             )}
         </main>
