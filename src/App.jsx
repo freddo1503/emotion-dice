@@ -231,30 +231,30 @@ function App() {
                                 "Ready to explore emotions"
                             )}
                         </div>
-                        <p className="emotion-context">
-                            {emotion ? 
-                                parentEmotion && grandparentEmotion ? 
-                                    `How would you express "${emotion}" (a type of ${parentEmotion}, which is a type of ${grandparentEmotion}) in a scene? Consider body language, tone, and facial expressions.` : 
-                                    parentEmotion ? 
-                                        `How would you express "${emotion}" (a type of ${parentEmotion}) in a scene? Consider body language, tone, and facial expressions.` : 
-                                        `How would you express "${emotion}" in a scene? Consider body language, tone, and facial expressions.`
-                                : 
-                                "Click the button below to discover an emotion to portray in your improv exercise."
+                        <button
+                            className={`emotion-button ${emotion ? 'picked' : ''}`}
+                            onClick={pickEmotion}
+                            aria-label={
+                                emotion
+                                    ? "Roll the emotion dice again"
+                                    : "Roll the emotion dice"
                             }
-                        </p>
+                            disabled={emotions.length === 0}
+                        >
+                            {emotion ? "Roll Again" : "Roll the Dice"}
+                        </button>
                     </div>
-                    <button
-                        className={`emotion-button ${emotion ? 'picked' : ''}`}
-                        onClick={pickEmotion}
-                        aria-label={
-                            emotion
-                                ? "Roll the emotion dice again"
-                                : "Roll the emotion dice"
+                    <p className="emotion-context">
+                        {emotion ? 
+                            parentEmotion && grandparentEmotion ? 
+                                `How would you express "${emotion}" (a type of ${parentEmotion}, which is a type of ${grandparentEmotion}) in a scene? Consider body language, tone, and facial expressions.` : 
+                                parentEmotion ? 
+                                    `How would you express "${emotion}" (a type of ${parentEmotion}) in a scene? Consider body language, tone, and facial expressions.` : 
+                                    `How would you express "${emotion}" in a scene? Consider body language, tone, and facial expressions.`
+                            : 
+                            "Click the button above to discover an emotion to portray in your improv exercise."
                         }
-                        disabled={emotions.length === 0}
-                    >
-                        {emotion ? "Roll Again" : "Roll the Dice"}
-                    </button>
+                    </p>
 
                     <div className="emotion-info">
                         <p>This tool randomly selects from {emotions.length} different emotions to help improv performers practice emotional range and add spontaneity to exercises.</p>

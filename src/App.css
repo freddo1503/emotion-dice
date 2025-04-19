@@ -29,6 +29,14 @@ body {
   padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* Apply border-box to all elements */
+*, *:before, *:after {
+  box-sizing: inherit;
 }
 
 /* Accessibility enhancements */
@@ -49,8 +57,9 @@ body {
 /* App container */
 .app-container {
   max-width: 600px;
+  width: 100%;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 2rem 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -109,7 +118,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   padding: 2rem 1.5rem;
   background-color: var(--light-accent);
   border-radius: var(--border-radius-lg);
@@ -217,7 +226,7 @@ body {
 
 /* Button styling */
 .emotion-button {
-  padding: 0.85rem 2.25rem;
+  padding: 0.75rem 1.75rem;
   font-weight: 600;
   font-size: 1rem;
   background: var(--gradient-primary);
@@ -229,8 +238,13 @@ body {
   letter-spacing: 0.5px;
   box-shadow: 0 4px 12px rgba(100, 116, 139, 0.2);
   position: relative;
+  margin-top: 1.5rem;
+  align-self: center;
   overflow: hidden;
-  z-index: 1;
+  z-index: 2;
+  -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+  touch-action: manipulation; /* Optimize for touch */
+  min-height: 44px; /* Minimum touch target size */
 }
 
 .emotion-button::before {
@@ -301,6 +315,24 @@ body {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
+@media (max-width: 600px) {
+  .loading-spinner {
+    width: 40px;
+    height: 40px;
+    border-width: 2.5px;
+    margin: 1.5rem auto;
+  }
+}
+
+@media (max-width: 400px) {
+  .loading-spinner {
+    width: 36px;
+    height: 36px;
+    border-width: 2px;
+    margin: 1.25rem auto;
+  }
+}
+
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
@@ -362,14 +394,21 @@ body {
   font-size: 1.05rem;
   color: var(--text-color);
   text-align: center;
-  margin: 1.5rem 0;
+  margin: 0 0 2rem 0;
   line-height: 1.7;
-  max-width: 450px;
-  padding: 0.75rem;
+  max-width: 500px;
+  width: 100%;
+  padding: 1rem 1.25rem;
   position: relative;
   z-index: 1;
   font-weight: 450;
   letter-spacing: 0.2px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  background-color: white;
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
 }
 
 .emotion-context strong {
@@ -416,6 +455,21 @@ body {
 }
 
 /* Responsive adjustments */
+@media (max-width: 768px) {
+  .app-container {
+    padding: 1.75rem 1.25rem;
+  }
+
+  .emotion-image-container {
+    max-width: 220px;
+  }
+
+  .emotion-context {
+    font-size: 1.02rem;
+    padding: 0.5rem;
+  }
+}
+
 @media (max-width: 600px) {
   .app-container {
     padding: 1.5rem 1rem;
@@ -428,28 +482,33 @@ body {
   }
 
   .emotion-container {
-    padding: 1.5rem 1rem;
-    margin-bottom: 1.5rem;
+    padding: 1.5rem 1rem 1rem 1rem;
+    margin-bottom: 1.25rem;
   }
 
   .emotion-display {
     padding: 1rem;
-    margin: 1rem 0;
+    margin: 1rem 0 0.5rem 0;
   }
 
   .emotion-button {
-    padding: 0.75rem 1.75rem;
+    padding: 0.65rem 1.5rem;
+    margin-top: 1.25rem;
+    font-size: 0.95rem;
   }
 
   .emotion-context {
     font-size: 1rem;
-    margin: 1.25rem 0;
+    margin: 0 0 1.5rem 0;
     line-height: 1.6;
+    max-width: 100%;
+    padding: 0.85rem 1rem;
   }
 
   .emotion-info {
     margin-top: 2.5rem;
     padding: 0.75rem 1rem;
+    max-width: 100%;
   }
 
   .grandparent-emotion {
@@ -465,6 +524,10 @@ body {
   .error-message {
     padding: 1.25rem 1rem;
   }
+
+  .emotion-image-container {
+    max-width: 200px;
+  }
 }
 
 /* Small mobile adjustments */
@@ -475,20 +538,145 @@ body {
 
   .app-subtitle {
     font-size: 0.9rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     line-height: 1.6;
   }
 
+  .emotion-container {
+    padding: 1.25rem 0.75rem 0.75rem 0.75rem;
+    margin-bottom: 1rem;
+  }
+
   .emotion-image-container {
-    max-width: 200px;
+    max-width: 180px;
+    margin-bottom: 1.25rem;
   }
 
   .emotion-display {
     font-size: 1.4rem;
+    padding: 0.75rem;
+    margin: 0.75rem 0 0.5rem 0;
   }
 
   .emotion-button {
+    font-size: 0.9rem;
+    padding: 0.6rem 1.4rem;
+    margin-top: 1rem;
+  }
+
+  .emotion-context {
     font-size: 0.95rem;
-    padding: 0.7rem 1.6rem;
+    margin: 0 0 1.25rem 0;
+    padding: 0.75rem 0.9rem;
+    line-height: 1.5;
+  }
+
+  .grandparent-emotion, .parent-emotion {
+    padding: 0.25rem 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .emotion-info {
+    font-size: 0.85rem;
+    padding: 0.75rem;
+    margin-top: 2rem;
+  }
+}
+
+/* Very small mobile adjustments */
+@media (max-width: 320px) {
+  .app-container {
+    padding: 1.25rem 0.75rem;
+  }
+
+  .app-title {
+    font-size: 1.6rem;
+  }
+
+  .app-subtitle {
+    font-size: 0.85rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .emotion-container {
+    padding: 1rem 0.5rem 0.6rem 0.5rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .emotion-image-container {
+    max-width: 160px;
+    margin-bottom: 1rem;
+  }
+
+  .emotion-display {
+    font-size: 1.25rem;
+    padding: 0.6rem;
+    margin: 0.6rem 0 0.4rem 0;
+  }
+
+  .emotion-button {
+    font-size: 0.85rem;
+    padding: 0.5rem 1.2rem;
+    margin-top: 0.8rem;
+  }
+
+  .emotion-context {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    padding: 0.65rem 0.8rem;
+    margin: 0 0 1rem 0;
+  }
+
+  .grandparent-emotion, .parent-emotion {
+    font-size: 0.8rem;
+  }
+}
+
+/* Landscape mode adjustments for mobile */
+@media (max-width: 900px) and (orientation: landscape) {
+  .app-container {
+    padding: 1rem;
+    min-height: auto; /* Allow scrolling in landscape */
+  }
+
+  .app-title {
+    margin-bottom: 0.25rem;
+  }
+
+  .app-subtitle {
+    margin-bottom: 1rem;
+  }
+
+  .emotion-container {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .emotion-button {
+    padding: 0.5rem 1.2rem;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+  }
+
+  .emotion-image-container {
+    max-width: 200px;
+    margin-bottom: 1rem;
+  }
+
+  .emotion-display {
+    width: 100%;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .emotion-context {
+    width: 100%;
+    margin: 0 0 1rem 0;
+    padding: 0.75rem 1rem;
+  }
+
+  .emotion-info {
+    margin-top: 1rem;
   }
 }
