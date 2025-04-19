@@ -23,7 +23,7 @@ const findImagePath = (emotionName, data = feelingsData) => {
                 // Replace spaces with hyphens for consistent naming
                 return part.toLowerCase().replace(/ /g, '-');
             });
-            const imagePath = `/images/${formattedPathParts.join('/')}.png`;
+            const imagePath = `/images/${formattedPathParts.join('/')}.jpg`;
             console.log('Generated image path:', imagePath);
             return imagePath;
         }
